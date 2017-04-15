@@ -5,10 +5,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 $app->get(
     '/',
-    function () use ($app) {
+    function (Request $request) use ($app) {
+        $query = $request->get('q');
+        $index = $app['pucene.index'];
+
+        return $app['twig']->render('index.html.twig', ['query' => $query, 'texts' => $index->search($query)]);
+    }
+)->bind('list');
+
+$app->post(
+    '/',
+    function (Request $request) use ($app) {
+        $index = $app['pucene.index'];
+
+        $index->index($request->get('text'));
+
         return $app['twig']->render('index.html.twig', []);
     }
-)->bind('homepage');
+)->bind('create');
 
 $app->error(
     function (\Exception $e, Request $request, $code) use ($app) {

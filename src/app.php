@@ -12,4 +12,6 @@ $app->register(new AssetServiceProvider());
 $app->register(new TwigServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
 
+$app['pucene.index'] = new \Pucene\Index(new \Pucene\Analyzer(), new \Pucene\Storage());
+
 return $app;
