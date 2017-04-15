@@ -26,11 +26,10 @@ class Index
 
     public function index($text)
     {
-        $id = md5($text);
         $terms = $this->analyzer->analyze($text);
 
         foreach ($terms as $term) {
-            $this->storage->save($id, $term, $text);
+            $this->storage->save($term, $text);
         }
 
         return $text;
@@ -42,7 +41,7 @@ class Index
 
         $hits = [];
         foreach ($terms as $term) {
-            $hits[] = $this->storage->load($term);
+            $hits = array_merge($hits, $this->storage->load($term));
         }
 
         return $hits;

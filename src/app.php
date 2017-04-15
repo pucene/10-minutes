@@ -12,6 +12,6 @@ $app->register(new AssetServiceProvider());
 $app->register(new TwigServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
 
-$app['pucene.index'] = new \Pucene\Index(new \Pucene\Analyzer(), new \Pucene\Storage());
+$app['pucene.index'] = new \Pucene\Index(new \Pucene\Analyzer(), new \Pucene\Storage(__DIR__ . '/../var/storage.data'));
 
 return $app;

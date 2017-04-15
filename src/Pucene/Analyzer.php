@@ -6,6 +6,6 @@ class Analyzer
 {
     public function analyze($text)
     {
-        return explode(' ', $text);
+        return explode(' ', strtolower($text));
     }
 }
